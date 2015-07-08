@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentFormatterTests.cs" />
     <Compile Include="RegularExpressionHelperTests.cs" />
     <Compile Include="DocumentPrinterTests.cs" />
     <Compile Include="MailMergeTests.cs" />
