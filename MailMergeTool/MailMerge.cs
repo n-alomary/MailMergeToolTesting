@@ -1,17 +1,24 @@
 namespace MailMergeTool
 {
-    using System;
+    using System.Linq;
 
     public class MailMerge
     {
+        readonly IPersonRepository _repository;
+        readonly IDocumentPrinter _documentPrinter;
+
         public MailMerge(IPersonRepository repository, IDocumentPrinter documentPrinter)
         {
+            _repository = repository;
+            _documentPrinter = documentPrinter;
         }
 
         public void MergeAndPrint(Document document)
         {
-            // TODO enumerate repository.Persons and send to printer
-            throw new NotImplementedException();
+            foreach (var merged in _repository.Persons().Select(person => new MergedDocument { Document = document, Person = person }))
+            {
+                _documentPrinter.Print(merged);
+            }
         }
     }
 }

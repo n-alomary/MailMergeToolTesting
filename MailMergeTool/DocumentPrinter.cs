@@ -1,17 +1,20 @@
 namespace MailMergeTool
 {
-    using System;
-
     public class DocumentPrinter : IDocumentPrinter
     {
+        readonly IDocumentFormatter _documentFormatter;
+        readonly IPrinter _printer;
+
         public DocumentPrinter(IDocumentFormatter documentFormatter, IPrinter printer)
         {
+            _documentFormatter = documentFormatter;
+            _printer = printer;
         }
 
         public void Print(MergedDocument document)
         {
-            // TODO turn document into string, using the formatter, and print
-            throw new NotImplementedException();
+            var formatted = _documentFormatter.DocumentToString(document);
+            _printer.Print(formatted);
         }
     }
 }
